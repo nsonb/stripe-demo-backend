@@ -40,7 +40,7 @@ app.post(
 
 const corsOption = {
   origin: '*',
-  method: 'GET, POST',
+  method: 'GET, POST, PUT, PATCH',
   allowedHeaders: '*',
 };
 
