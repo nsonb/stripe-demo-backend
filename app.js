@@ -38,7 +38,13 @@ app.post(
   }
 );
 
-app.use(cors());
+const corsOption = {
+  origin: '*',
+  method: 'GET, POST',
+  allowedHeaders: '*',
+};
+
+app.use(cors(corsOption));
 app.use(express.json()); // Middleware to parse JSON payloads
 
 app.get('/', (req, res) => {
