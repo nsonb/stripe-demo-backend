@@ -48,10 +48,12 @@ app.use(cors(corsOption));
 app.use(express.json()); // Middleware to parse JSON payloads
 
 app.get('/', (req, res) => {
+  res.header('Access-Control-Allow-Origin', '*');
   res.send('Hello World!');
 });
 
 app.get('/payment', (req, res) => {
+  res.header('Access-Control-Allow-Origin', '*');
   res.send('This is link to payment');
 });
 
@@ -61,6 +63,7 @@ app.get('/stripe-products', async (req, res) => {
     const products = await stripe.products.list();
     res.json(products);
   } catch (error) {
+    res.header('Access-Control-Allow-Origin', '*');
     res.status(500).json({ error: error.message });
   }
 });
@@ -76,6 +79,7 @@ app.post('/create-checkout-session', async (req, res) => {
     });
     res.json({ id: session.id }); // Return the session ID */
   } catch (error) {
+    res.header('Access-Control-Allow-Origin', '*');
     res.status(500).json({ error: error.message });
   }
 });
@@ -114,6 +118,7 @@ async function fulfillCheckout(sessionId) {
 }
 
 app.get('/purchase-history', async (req, res) => {
+  res.header('Access-Control-Allow-Origin', '*');
   res.json(purchaseHistory); // Return the recorded purchase history
 });
 
