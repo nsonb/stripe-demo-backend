@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY); // Use the secret from .env
 
-const endpointSecret = process.env.WEBHOOK_SECRET;
+const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 const app = express();
 const port = process.env.PORT || 4239;
 
@@ -11,6 +11,7 @@ const port = process.env.PORT || 4239;
 let purchaseHistory = [];
 
 // the webhook must be placed before app.use(json). No idea why it is like this ?
+// probably because the content is not json format?
 app.post(
   '/webhook',
   express.raw({ type: 'application/json' }),
